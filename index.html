@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>École Nouroul-Islam — Gestion scolaire</title>
+<link rel="icon" href="assets/logo.jpeg" type="image/jpeg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================== CONNEXION ============================== -->
+<div class="login-wrap view active" id="loginView">
+  <div class="login-visual">
+    <div class="khatam-pattern" id="khatamBg"></div>
+    <img src="assets/logo.jpeg" alt="Logo École Nouroul-Islam">
+    <h1 data-i18n="school"></h1>
+    <div class="sub" data-i18n="schoolTag"></div>
+    <p class="tagline" data-i18n="login_tagline"></p>
+  </div>
+  <div class="login-form-side">
+    <form class="login-card" id="loginForm" autocomplete="off">
+      <h2 data-i18n="login_title"></h2>
+      <p class="hint" data-i18n="login_hint"></p>
+      <div class="error-msg" id="loginError" data-i18n="login_error"></div>
+      <div class="field">
+        <label data-i18n="login_username"></label>
+        <input type="text" id="username" value="admin" autocomplete="username">
+      </div>
+      <div class="field">
+        <label data-i18n="login_password"></label>
+        <input type="password" id="password" data-i18n-ph="login_password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary" data-i18n="login_btn"></button>
+      <div class="lang-row">
+        <button type="button" class="lang-pill" data-lang="fr" onclick="setLang('fr')">Français</button>
+        <button type="button" class="lang-pill" data-lang="en" onclick="setLang('en')">English</button>
+        <button type="button" class="lang-pill" data-lang="ar" onclick="setLang('ar')">العربية</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================== APPLICATION ============================== -->
+<div class="app-shell" id="appShell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="assets/logo.jpeg" alt="Logo">
+      <div class="name" data-i18n="school"></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" data-page="dashboard" onclick="navigate('dashboard');return false;">
+        <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+        <span data-i18n="nav_dashboard"></span>
+      </a>
+      <div class="nav-label" data-i18n="nav_section_manage"></div>
+      <a href="#" data-page="enseignants" onclick="navigate('enseignants');return false;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M5 20c1.2-4 4.2-6 7-6s5.8 2 7 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_teachers"></span>
+      </a>
+      <a href="#" data-page="eleves" onclick="navigate('eleves');return false;">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M3 20c1-3.4 3.6-5.2 6-5.2s5 1.8 6 5.2M15 20c.6-2.4 2-4 4.2-4.6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_students"></span>
+      </a>
+      <a href="#" data-page="comptabilite" onclick="navigate('comptabilite');return false;">
+        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M3 10h18M16 15h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_accounting"></span>
+      </a>
+      <div class="nav-label" data-i18n="nav_section_pedago"></div>
+      <a href="#" data-page="notes" onclick="navigate('notes');return false;">
+        <svg viewBox="0 0 24 24"><path d="M4 20l1-4.4L15.6 5 19 8.4 8.4 19 4 20Z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/></svg>
+        <span data-i18n="nav_grades"></span>
+      </a>
+      <a href="#" data-page="bulletins" onclick="navigate('bulletins');return false;">
+        <svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_bulletins"></span>
+      </a>
+      <a href="#" data-page="parametres" onclick="navigate('parametres');return false;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18 6l-1.6 1.6M7.6 16.4 6 18M18 18l-1.6-1.6M7.6 7.6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span data-i18n="nav_settings"></span>
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="btn btn-outline" onclick="logout()" data-i18n="logout"></button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div>
+        <div class="crumb" data-i18n="school"></div>
+        <h1 id="topbarTitle" data-i18n="nav_dashboard"></h1>
+      </div>
+      <div class="topbar-right">
+        <div class="lang-switch">
+          <button data-lang="fr" onclick="setLang('fr')">FR</button>
+          <button data-lang="en" onclick="setLang('en')">EN</button>
+          <button data-lang="ar" onclick="setLang('ar')">AR</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ---------- TABLEAU DE BORD ---------- -->
+      <section class="view" id="view-dashboard">
+        <div class="stat-grid">
+          <div class="stat-card accent-green"><div class="stat-label" data-i18n="dash_students"></div><div class="stat-value" id="statStudents">0</div></div>
+          <div class="stat-card accent-green"><div class="stat-label" data-i18n="dash_teachers"></div><div class="stat-value" id="statTeachers">0</div></div>
+          <div class="stat-card accent-gold"><div class="stat-label" data-i18n="dash_collected"></div><div class="stat-value" id="statCollected">0</div></div>
+          <div class="stat-card accent-danger"><div class="stat-label" data-i18n="dash_pending"></div><div class="stat-value" id="statPending">0</div></div>
+          <div class="stat-card accent-gold"><div class="stat-label" data-i18n="dash_balance"></div><div class="stat-value" id="statBalance">0</div></div>
+          <div class="stat-card accent-green"><div class="stat-label" data-i18n="dash_avg"></div><div class="stat-value" id="statAvg">—</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="dash_classes_repartition"></h3></div>
+          <div class="panel-body"><div id="classChart" style="display:flex; gap:10px; align-items:flex-end; height:150px; flex-wrap:wrap;"></div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="dash_recent_payments"></h3></div>
+          <div class="table-wrap"><table class="data-table" id="recentPaymentsTable">
+            <thead><tr><th data-i18n="stud_name"></th><th data-i18n="stud_class"></th><th data-i18n="acc_amount"></th><th data-i18n="acc_date"></th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="dash_low_balance"></h3></div>
+          <div class="table-wrap"><table class="data-table" id="lowBalanceTable">
+            <thead><tr><th data-i18n="stud_name"></th><th data-i18n="stud_class"></th><th data-i18n="stud_total"></th><th data-i18n="stud_remain"></th><th></th></tr></thead>
+            <tbody></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ---------- ENSEIGNANTS ---------- -->
+      <section class="view" id="view-enseignants">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 data-i18n="teach_title"></h3>
+            <div class="panel-toolbar">
+              <input type="text" id="teacherSearchBox" data-i18n-ph="search" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:9px;min-width:200px;">
+              <button class="btn btn-primary btn-sm" onclick="openTeacherModal()"><span data-i18n="teach_add"></span></button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th data-i18n="teach_name"></th><th data-i18n="teach_subject"></th><th data-i18n="teach_grade"></th>
+                <th data-i18n="teach_level"></th><th data-i18n="teach_salary"></th><th data-i18n="teach_phone"></th>
+                <th data-i18n="teach_status"></th><th data-i18n="actions"></th>
+              </tr></thead>
+              <tbody id="teacherTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- ÉLÈVES ---------- -->
+      <section class="view" id="view-eleves">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 data-i18n="stud_title"></h3>
+            <div class="panel-toolbar">
+              <div class="pill-select" id="classFilter"></div>
+              <input type="text" id="studentSearchBox" data-i18n-ph="search" style="padding:8px 12px;border:1.5px solid var(--border);border-radius:9px;min-width:180px;">
+              <button class="btn btn-primary btn-sm" onclick="openStudentModal()"><span data-i18n="stud_add"></span></button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th data-i18n="stud_name"></th><th data-i18n="stud_class"></th><th data-i18n="stud_total"></th>
+                <th data-i18n="stud_paid"></th><th data-i18n="stud_remain"></th><th data-i18n="stud_status"></th><th data-i18n="actions"></th>
+              </tr></thead>
+              <tbody id="studentTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- COMPTABILITÉ ---------- -->
+      <section class="view" id="view-comptabilite">
+        <div class="stat-grid">
+          <div class="stat-card accent-green"><div class="stat-label" data-i18n="acc_income"></div><div class="stat-value" id="sumIncome" style="color:var(--success)">0</div></div>
+          <div class="stat-card accent-danger"><div class="stat-label" data-i18n="acc_expense"></div><div class="stat-value" id="sumExpense" style="color:var(--danger)">0</div></div>
+          <div class="stat-card accent-gold"><div class="stat-label" data-i18n="acc_balance"></div><div class="stat-value" id="sumBalance">0</div></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h3 data-i18n="acc_title"></h3>
+            <div class="panel-toolbar">
+              <div class="pill-select" id="typeFilter">
+                <button class="active" data-t="all" onclick="setTypeFilter('all')" data-i18n="all"></button>
+                <button data-t="recette" onclick="setTypeFilter('recette')" data-i18n="acc_income"></button>
+                <button data-t="depense" onclick="setTypeFilter('depense')" data-i18n="acc_expense"></button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="openTxModal()"><span data-i18n="acc_add"></span></button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th data-i18n="acc_date"></th><th data-i18n="acc_type"></th><th data-i18n="acc_category"></th>
+                <th data-i18n="acc_desc"></th><th data-i18n="acc_amount"></th><th data-i18n="actions"></th>
+              </tr></thead>
+              <tbody id="txTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- NOTES ---------- -->
+      <section class="view" id="view-notes">
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="note_title"></h3></div>
+          <div class="panel-body">
+            <div class="form-grid" style="margin-bottom:6px;">
+              <div class="field">
+                <label data-i18n="note_class"></label>
+                <select id="n_classe" onchange="onNoteClassOrTermChange()"></select>
+              </div>
+              <div class="field">
+                <label data-i18n="note_term"></label>
+                <select id="n_term" onchange="onNoteClassOrTermChange()">
+                  <option value="term1" data-i18n="term1"></option>
+                  <option value="term2" data-i18n="term2"></option>
+                  <option value="term3" data-i18n="term3"></option>
+                </select>
+              </div>
+              <div class="field full">
+                <label data-i18n="note_subject"></label>
+                <div class="pill-select" id="subjectPills"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head flex-between">
+            <h3 id="gradeTableTitle"></h3>
+            <button class="btn btn-primary btn-sm" onclick="saveAllGrades()" data-i18n="note_save"></button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th data-i18n="note_student"></th><th data-i18n="note_devoir1"></th><th data-i18n="note_devoir2"></th>
+                <th data-i18n="note_compo"></th><th data-i18n="note_avg"></th>
+              </tr></thead>
+              <tbody id="gradeTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- BULLETINS ---------- -->
+      <section class="view" id="view-bulletins">
+        <div class="panel no-print">
+          <div class="panel-head"><h3 data-i18n="bull_title"></h3></div>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field">
+                <label data-i18n="stud_class"></label>
+                <select id="b_classe" onchange="populateBulletinStudentSelect()"></select>
+              </div>
+              <div class="field">
+                <label data-i18n="bull_select_student"></label>
+                <select id="b_student"></select>
+              </div>
+              <div class="field">
+                <label data-i18n="bull_select_term"></label>
+                <select id="b_term">
+                  <option value="term1" data-i18n="term1"></option>
+                  <option value="term2" data-i18n="term2"></option>
+                  <option value="term3" data-i18n="term3"></option>
+                </select>
+              </div>
+              <div class="field" style="align-self:flex-end;">
+                <button class="btn btn-primary" onclick="generateBulletin()" data-i18n="bull_generate"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="bulletinOutput"></div>
+      </section>
+
+      <!-- ---------- PARAMÈTRES ---------- -->
+      <section class="view" id="view-parametres">
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="set_language"></h3></div>
+          <div class="panel-body">
+            <div class="lang-row" style="justify-content:flex-start;">
+              <button type="button" class="lang-pill" data-lang="fr" onclick="setLang('fr')">Français</button>
+              <button type="button" class="lang-pill" data-lang="en" onclick="setLang('en')">English</button>
+              <button type="button" class="lang-pill" data-lang="ar" onclick="setLang('ar')">العربية</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="set_school_info"></h3></div>
+          <div class="panel-body">
+            <div class="form-grid">
+              <div class="field full"><label data-i18n="school"></label><input id="set_name"></div>
+              <div class="field"><label data-i18n="teach_phone"></label><input id="set_phone"></div>
+              <div class="field"><label>Adresse</label><input id="set_address"></div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="margin-top:6px;" onclick="saveSchoolInfo()" data-i18n="save"></button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="set_security"></h3></div>
+          <div class="panel-body">
+            <p class="text-muted" style="font-size:13px;margin-top:0;" data-i18n="security_note"></p>
+            <div class="form-grid">
+              <div class="field full"><label data-i18n="set_current_pass"></label><input id="pw_current" type="password"></div>
+              <div class="field"><label data-i18n="set_new_pass"></label><input id="pw_new" type="password"></div>
+              <div class="field"><label data-i18n="set_confirm_pass"></label><input id="pw_confirm" type="password"></div>
+            </div>
+            <button class="btn btn-primary btn-sm" style="margin-top:6px;" onclick="doChangePassword()" data-i18n="set_change_pass"></button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3 data-i18n="set_data"></h3></div>
+          <div class="panel-body" style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="exportBackup()" data-i18n="set_backup"></button>
+            <label class="btn btn-outline" style="display:inline-flex;">
+              <span data-i18n="set_restore"></span>
+              <input type="file" id="restoreFile" accept="application/json" style="display:none;" onchange="importBackup(event)">
+            </label>
+            <button class="btn btn-danger" onclick="resetDemoData()" data-i18n="set_reset"></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============================== MODALES ============================== -->
+<div class="modal-overlay" id="teacherModal">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="teacherModalTitle" data-i18n="teach_add"></h3><button class="close-x" onclick="closeModal('teacherModal')">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="t_id">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="stud_name"></label><input id="t_prenom" placeholder="Prénom"></div>
+        <div class="field"><label>&nbsp;</label><input id="t_nom" placeholder="Nom"></div>
+        <div class="field"><label data-i18n="teach_subject"></label><select id="t_matieres" multiple size="4"></select></div>
+        <div class="field">
+          <label data-i18n="teach_level"></label>
+          <select id="t_niveau"><option value="primaire" data-i18n="primaire"></option><option value="college" data-i18n="college"></option></select>
+        </div>
+        <div class="field"><label data-i18n="teach_grade"></label><input id="t_grade"></div>
+        <div class="field"><label data-i18n="teach_salary"></label><input id="t_salaire" type="number"></div>
+        <div class="field"><label data-i18n="teach_phone"></label><input id="t_telephone"></div>
+        <div class="field"><label data-i18n="teach_email"></label><input id="t_email" type="email"></div>
+        <div class="field"><label data-i18n="teach_hire"></label><input id="t_dateEmbauche" type="date"></div>
+        <div class="field">
+          <label data-i18n="teach_status"></label>
+          <select id="t_statut"><option value="actif" data-i18n="teach_active"></option><option value="inactif" data-i18n="teach_inactive"></option></select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal('teacherModal')" data-i18n="cancel"></button>
+      <button class="btn btn-primary" onclick="saveTeacher()" data-i18n="save"></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="studentModal">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="studentModalTitle" data-i18n="stud_add"></h3><button class="close-x" onclick="closeModal('studentModal')">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="s_id">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="stud_name"></label><input id="s_prenom" placeholder="Prénom"></div>
+        <div class="field"><label>&nbsp;</label><input id="s_nom" placeholder="Nom"></div>
+        <div class="field"><label data-i18n="stud_class"></label><select id="s_classe"></select></div>
+        <div class="field"><label data-i18n="stud_dob"></label><input id="s_dob" type="date"></div>
+        <div class="field"><label data-i18n="stud_parent"></label><input id="s_parent"></div>
+        <div class="field"><label data-i18n="stud_phone"></label><input id="s_phone"></div>
+        <div class="field"><label data-i18n="stud_total"></label><input id="s_total" type="number"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal('studentModal')" data-i18n="cancel"></button>
+      <button class="btn btn-primary" onclick="saveStudent()" data-i18n="save"></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal-box">
+    <div class="modal-head"><h3 data-i18n="stud_add_payment"></h3><button class="close-x" onclick="closeModal('paymentModal')">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="p_student_id">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="stud_payment_amount"></label><input id="p_amount" type="number"></div>
+        <div class="field"><label data-i18n="stud_payment_date"></label><input id="p_date" type="date"></div>
+        <div class="field full"><label data-i18n="stud_payment_note"></label><input id="p_note"></div>
+      </div>
+      <button class="btn btn-gold btn-sm" style="margin-bottom:16px;" onclick="addPayment()" data-i18n="save"></button>
+      <h4 data-i18n="stud_history" style="font-size:14px;"></h4>
+      <div class="table-wrap"><table class="data-table" id="paymentHistoryTable">
+        <thead><tr><th data-i18n="stud_payment_date"></th><th data-i18n="acc_amount"></th><th data-i18n="stud_payment_note"></th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-outline" onclick="closeModal('paymentModal')" data-i18n="close"></button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="txModal">
+  <div class="modal-box">
+    <div class="modal-head"><h3 data-i18n="acc_add"></h3><button class="close-x" onclick="closeModal('txModal')">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="tx_id">
+      <div class="form-grid">
+        <div class="field">
+          <label data-i18n="acc_type"></label>
+          <select id="tx_type"><option value="recette" data-i18n="acc_income"></option><option value="depense" data-i18n="acc_expense"></option></select>
+        </div>
+        <div class="field">
+          <label data-i18n="acc_category"></label>
+          <select id="tx_categorie">
+            <option value="ecolage" data-i18n="cat_ecolage"></option>
+            <option value="salaire" data-i18n="cat_salaire"></option>
+            <option value="fourniture" data-i18n="cat_fourniture"></option>
+            <option value="entretien" data-i18n="cat_entretien"></option>
+            <option value="transport" data-i18n="cat_transport"></option>
+            <option value="autre" data-i18n="cat_autre"></option>
+          </select>
+        </div>
+        <div class="field"><label data-i18n="acc_amount"></label><input id="tx_montant" type="number"></div>
+        <div class="field"><label data-i18n="acc_date"></label><input id="tx_date" type="date"></div>
+        <div class="field full"><label data-i18n="acc_desc"></label><input id="tx_desc"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal('txModal')" data-i18n="cancel"></button>
+      <button class="btn btn-primary" onclick="saveTx()" data-i18n="save"></button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  // Motif géométrique décoratif en fond du panneau visuel de connexion
+  const bg = document.getElementById('khatamBg');
+  let star = '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">';
+  for(let x=0; x<5; x++){
+    for(let y=0; y<5; y++){
+      star += `<g transform="translate(${x*90+20},${y*90+20}) scale(1.6)">
+        <polygon points="0,-14 3,-7 10,-10 6,-4 14,0 6,4 10,10 3,7 0,14 -3,7 -10,10 -6,4 -14,0 -6,-4 -10,-10 -3,-7" fill="#fff"/>
+      </g>`;
+    }
+  }
+  star += '</svg>';
+  bg.innerHTML = star;
+</script>
+</body>
+</html>
